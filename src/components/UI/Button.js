@@ -1,15 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Wrapper, StyledImage } from './styles/Button.styled';
 
 const Button = (props) => (
-  <button className="button">
-    <img
-      src={props.img}
-      className="button__img"
-      style={{ height: '16px', width: '16px' }}
-      alt=""
-    />
-  </button>
+  <Wrapper>
+    <StyledImage src={props.img} alt="" />
+  </Wrapper>
 );
 
 Button.propTypes = {

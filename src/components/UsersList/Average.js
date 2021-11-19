@@ -1,20 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { Wrapper } from './styles/Average.styled';
 
-export default class extends React.Component {
-  setColor() {
-    if (this.props.average >= 2 && this.props.average <= 3)
-      this.color = 'rgb(240,128,128)';
-    else if (this.props.average > 3 && this.props.average <= 4)
-      this.color = 'rgb(255,255,224)';
-    else if (this.props.average > 4) this.color = 'rgb(173,255,47)';
-  }
+const Average = (props) => (
+  <Wrapper average={props.average}>{props.average}</Wrapper>
+);
 
-  render() {
-    this.setColor();
-    return (
-      <div className="average" style={{ backgroundColor: this.color }}>
-        {this.props.average}
-      </div>
-    );
-  }
-}
+Average.propTypes = {
+  average: PropTypes.string.isRequired,
+};
+
+export default Average;

@@ -26,6 +26,7 @@ export const users = [
   },
   {
     name: 'Paweł Roman',
+    attendance: '75%',
     average: '2.4',
   },
 ];

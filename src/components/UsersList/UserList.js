@@ -1,17 +1,18 @@
 import React from 'react';
 import { users } from '../../data/users';
 import User from './User';
+import { Wrapper, StyledLi, StyledUl } from './styles/UserList.styled';
 
 const UsersList = () => (
-  <div>
-    <ul className="userList">
+  <Wrapper>
+    <StyledUl>
       {users.map(({ name, average, attendance }) => (
-        <li className="userList__element" key={name}>
+        <StyledLi className="userList__element" key={name}>
           <User name={name} average={average} attendance={attendance} />
-        </li>
+        </StyledLi>
       ))}
-    </ul>
-  </div>
+    </StyledUl>
+  </Wrapper>
 );
 
 export default UsersList;

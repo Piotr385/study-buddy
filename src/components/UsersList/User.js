@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import Average from './Average';
 import NameAndAttendance from './NameAndAttendance';
 import Button from '../UI/Button';
-import close from 'assets/error.svg';
+import close from 'assets/icons/error.svg';
+import { Wrapper } from './styles/User.styled';
 
 const User = (props) => (
-  <div className="user">
+  <Wrapper>
     <Average average={props.average} />
     <NameAndAttendance name={props.name} attendance={props.attendance} />
     <Button img={close} />
-  </div>
+  </Wrapper>
 );
 
 User.propTypes = {
