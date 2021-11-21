@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Wrapper } from './styles/Average.styled';
+import { Wrapper } from './Average.styled';
 
-const Average = (props) => (
-  <Wrapper average={props.average}>{props.average}</Wrapper>
-);
+const Average = ({ average }) => <Wrapper average={average}>{average}</Wrapper>;
 
 Average.propTypes = {
   average: PropTypes.string.isRequired,

@@ -23,7 +23,7 @@ export const StyledLi = styled.li`
     bottom: 0;
     width: 100%;
     height: 1px;
-    background-color: ${({ theme }) => theme.colors.lightGrey.main};
+    background-color: ${({ theme }) => theme.colors.lightGrey};
   }
 `;
 
