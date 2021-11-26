@@ -1,10 +1,11 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
-import Average from '../../atoms/Average/Average';
-import NameAndAttendance from '../../atoms/NameAndAttendance/NameAndAttendance';
-import Button from '../../atoms/Button/Button';
+import PropTypes from 'prop-types';
+import Average from 'components/atoms/User/Average/Average';
+import NameAndAttendance from 'components/atoms/User/NameAndAttendance/NameAndAttendance';
+import Button from 'components/atoms/UI/IconButton/Button';
 import close from 'assets/icons/error.svg';
 import { Wrapper } from './User.styled';
+import { UserShape } from 'types/index';
 
 const User = ({ user, deleteUser }) => (
   <Wrapper>
@@ -14,10 +15,9 @@ const User = ({ user, deleteUser }) => (
   </Wrapper>
 );
 
-// User.propTypes = {
-//   average: PropTypes.string.isRequired,
-//   name: PropTypes.string.isRequired,
-//   attendance: PropTypes.string.isRequired,
-// };
+User.propTypes = {
+  user: PropTypes.shape(UserShape).isRequired,
+  deleteUser: PropTypes.func.isRequired,
+};
 
 export default User;

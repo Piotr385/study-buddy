@@ -13,23 +13,15 @@ export const Wrapper = styled.section`
   align-items: center;
 `;
 
-export const StyledLi = styled.li`
-  display: flex;
-  align-items: center;
-  position: relative;
-  &:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 1px;
-    background-color: ${({ theme }) => theme.colors.grey};
-  }
+export const FormWrapper = styled.form`
+  display: grid;
+  justify-items: start;
+  gap: 10px;
+  width: 100%;
 `;
 
-export const StyledUl = styled.ul`
+export const StyledTitle = styled.h1`
+  font-size: ${({ theme }) => theme.fontSize.xl};
+  color: ${({ theme }) => theme.colors.darkGrey};
   width: 100%;
-  padding: 10px;
-  margin: 0;
-  list-style: none;
 `;
