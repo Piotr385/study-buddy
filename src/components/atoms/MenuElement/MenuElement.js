@@ -6,7 +6,7 @@ const MenuElement = ({ value, to }) => {
   if (to === '/')
     return (
       <Wrapper>
-        <StyledLink to={to} exact>
+        <StyledLink to={to} exact="true">
           {value}
         </StyledLink>
       </Wrapper>

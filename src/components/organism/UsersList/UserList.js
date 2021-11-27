@@ -5,14 +5,14 @@ import { StyledLi, StyledUl } from './UserList.styled';
 import { UserShape } from 'types';
 import { Title } from 'components/atoms/UI/Title/Title';
 
-const UsersList = ({ users, deleteUser }) => {
+const UsersList = ({ users }) => {
   return (
     <>
       <Title>Students list</Title>
       <StyledUl>
         {users.map((user) => (
-          <StyledLi>
-            <User deleteUser={deleteUser} key={user.id} user={user} />
+          <StyledLi key={user.id}>
+            <User user={user} />
           </StyledLi>
         ))}
       </StyledUl>
@@ -22,7 +22,6 @@ const UsersList = ({ users, deleteUser }) => {
 
 UsersList.propTypes = {
   users: PropTypes.arrayOf(PropTypes.shape(UserShape)),
-  deleteUser: PropTypes.func,
 };
 
 export default UsersList;
