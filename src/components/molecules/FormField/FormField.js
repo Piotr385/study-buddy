@@ -14,6 +14,7 @@ const FormField = ({ label, name, id, value, onChange, type = 'text' }) => {
         type={type}
         value={value}
         onChange={onChange}
+        data-testid={label}
       />
     </Wrapper>
   );
@@ -23,7 +24,7 @@ FormField.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
   onChange: PropTypes.func,
   type: PropTypes.string,
 };
