@@ -4,7 +4,7 @@ export const menuElements = [
   {
     id: uuidv4(),
     value: 'Dashboard',
-    to: '/',
+    to: '/group',
   },
   {
     id: uuidv4(),

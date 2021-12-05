@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { StyledButton } from './TextButton.styled';
+import { Link } from 'react-router-dom';
 
 const TextButton = ({
   type = 'button',
@@ -15,9 +16,16 @@ const TextButton = ({
         as="a"
         isBig={isBig}
         href={to}
+        onClick={onClick}
         target="_blank"
         rel="noopener noreferrer"
       >
+        {children}
+      </StyledButton>
+    );
+  else if (type === 'router-link')
+    return (
+      <StyledButton as={Link} isBig={isBig} to={to} onClick={onClick}>
         {children}
       </StyledButton>
     );

@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Root from 'views/Root';
+import Root from 'views/Root/Root';
+import { worker } from 'moks/browser';
 
-console.log('hello');
+worker.start();
 
 ReactDOM.render(
   <React.StrictMode>

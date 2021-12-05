@@ -14,7 +14,6 @@ export const SearchBarWrapper = styled.div`
     font-size: ${({ theme }) => theme.fontSize.xl};
     width: 100%;
     max-width: 350px;
-    grid-column: 2;
     border: 2px solid ${({ theme }) => theme.colors.lightPurple};
   }
 `;
@@ -26,5 +25,41 @@ export const StatusInfo = styled.div`
 
   p {
     margin: 5px;
+  }
+`;
+
+export const StyledUl = styled.ul`
+  z-index: 1000;
+  max-height: 500px;
+  padding: 10px;
+  list-style: none;
+  width: 100%;
+  position: absolute;
+  left: 320px;
+  top: 44px;
+  display: flex;
+  flex-direction: column;
+  background-color: ${({ theme }) => theme.colors.white};
+  border: 2px solid ${({ theme }) => theme.colors.lightPurple};
+  border-top: none;
+  max-width: 350px;
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+
+  li {
+    font-weight: bold;
+    color: ${({ theme }) => theme.colors.darkGrey};
+    background-color: ${({ theme }) => theme.colors.white};
+    width: 100%;
+    padding: 20px 5px;
+
+    &:hover,
+    &:focus {
+      background-color: ${({ theme }) => theme.colors.lightPurple};
+    }
+
+    &:not(:last-child) {
+      border-bottom: 1px solid ${({ theme }) => theme.colors.darkPurple};
+    }
   }
 `;

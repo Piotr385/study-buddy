@@ -2,7 +2,7 @@ import React from 'react';
 import { screen, fireEvent } from '@testing-library/react';
 import { renderWithProviders } from 'helpers/renderWithProviders';
 import AddUser from 'views/AddUser';
-import Dashboard from '../Dashboard';
+import Dashboard from '../Dashborad/Dashboard';
 
 describe('AddUser', () => {
   it('Render the component', () => {

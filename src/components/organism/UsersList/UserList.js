@@ -5,7 +5,7 @@ import { StyledLi, StyledUl } from './UserList.styled';
 import { UserShape } from 'types';
 import { Title } from 'components/atoms/UI/Title/Title';
 
-const UsersList = ({ users }) => {
+const UsersList = ({ users = [] }) => {
   return (
     <>
       <Title>Students list</Title>
