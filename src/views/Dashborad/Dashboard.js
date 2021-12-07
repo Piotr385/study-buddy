@@ -47,7 +47,7 @@ const Dashboard = () => {
       <Wrapper>
         <Title>{id ? `Group ${id}` : 'All Students'}</Title>
         <TextButton onClick={() => switchSelectGroupPopup(true)}>
-          Change Group
+          {id ? 'Change Group' : 'Choose Group'}
         </TextButton>
       </Wrapper>
       <ViewWrapper>

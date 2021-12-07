@@ -19,10 +19,12 @@ export const handlers = [
   }),
   rest.get('/students/search/:searchValue', (req, res, ctx) => {
     if (req.params.searchValue) {
-      const encodedSearchValue = decodeURI(req.params.searchValue);
+      const encodedSearchValue = decodeURI(
+        req.params.searchValue
+      ).toLowerCase();
 
       const searchingStudents = students.filter((student) =>
-        student.name.includes(encodedSearchValue)
+        student.name.toLowerCase().includes(encodedSearchValue)
       );
       return res(ctx.status(200), ctx.json({ searchingStudents }));
     }

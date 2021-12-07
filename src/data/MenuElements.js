@@ -6,9 +6,4 @@ export const menuElements = [
     value: 'Dashboard',
     to: '/group',
   },
-  {
-    id: uuidv4(),
-    value: 'Add User',
-    to: '/add-user',
-  },
 ];

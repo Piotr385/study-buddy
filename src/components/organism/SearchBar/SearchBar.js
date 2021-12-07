@@ -1,21 +1,41 @@
 import React, { useState } from 'react';
-import { SearchBarWrapper, StatusInfo, StyledUl } from './SearchBar.styled';
+import { useCombobox } from 'downshift';
+import {
+  SearchBarWrapper,
+  SearchResultListItem,
+  SearchResults,
+  SearchWrapper,
+  StatusInfo,
+} from './SearchBar.styled';
 import { Input } from 'components/atoms/Form/Input/Input';
 import axios from 'axios';
 
 const SearchBar = () => {
-  const [students, setStudents] = useState([]);
+  const [matchingStudents, setMachingStudents] = useState([]);
 
-  const getSearchingStudents = (e) => {
-    const searchValue = e.target.value;
-
+  const getSearchingStudents = ({ inputValue }) => {
     axios
-      .get(`/students/search/${searchValue}`)
+      .get(`/students/search/${inputValue}`)
       .then(({ data }) => {
-        setStudents(data.searchingStudents);
+        if (data.searchingStudents) setMachingStudents(data.searchingStudents);
       })
       .catch((err) => console.log(err));
   };
+
+  const {
+    isOpen,
+    getToggleButtonProps,
+    getLabelProps,
+    getMenuProps,
+    getInputProps,
+    getComboboxProps,
+    highlightedIndex,
+    getItemProps,
+  } = useCombobox({
+    items: matchingStudents || [],
+    onInputValueChange: getSearchingStudents,
+  });
+
   return (
     <SearchBarWrapper>
       <StatusInfo>
@@ -24,14 +44,25 @@ const SearchBar = () => {
           <strong>Teacher</strong>
         </p>
       </StatusInfo>
-      <Input onInput={getSearchingStudents} />
-      {students && students.length > 0 ? (
-        <StyledUl>
-          {students.map((student) => (
-            <li key={student.id}>{student.name}</li>
-          ))}
-        </StyledUl>
-      ) : null}
+      <SearchWrapper {...getComboboxProps()}>
+        <Input {...getInputProps()} placeholder="Find students" />
+        <SearchResults
+          isVisible={isOpen && matchingStudents.length > 0}
+          {...getMenuProps()}
+          aria-label="results-list"
+        >
+          {isOpen &&
+            matchingStudents.map((item, index) => (
+              <SearchResultListItem
+                highlighted={highlightedIndex === index}
+                {...getItemProps({ item, index })}
+                key={item.id}
+              >
+                {item.name}
+              </SearchResultListItem>
+            ))}
+        </SearchResults>
+      </SearchWrapper>
     </SearchBarWrapper>
   );
 };

@@ -28,38 +28,41 @@ export const StatusInfo = styled.div`
   }
 `;
 
-export const StyledUl = styled.ul`
+export const SearchWrapper = styled.div`
+  position: relative;
+`;
+
+export const SearchResults = styled.ul`
+  visibility: ${({ isVisible }) => (isVisible ? 'visible' : 'hidden')};
   z-index: 1000;
   max-height: 500px;
+  overflow-y: scroll;
   padding: 10px;
+  border-radius: 15px;
   list-style: none;
   width: 100%;
   position: absolute;
-  left: 320px;
-  top: 44px;
+  left: 0;
+  top: 30px;
   display: flex;
   flex-direction: column;
   background-color: ${({ theme }) => theme.colors.white};
-  border: 2px solid ${({ theme }) => theme.colors.lightPurple};
-  border-top: none;
-  max-width: 350px;
-  border-bottom-right-radius: 15px;
-  border-bottom-left-radius: 15px;
+`;
 
-  li {
-    font-weight: bold;
-    color: ${({ theme }) => theme.colors.darkGrey};
-    background-color: ${({ theme }) => theme.colors.white};
-    width: 100%;
-    padding: 20px 5px;
+export const SearchResultListItem = styled.li`
+  font-weight: bold;
+  color: ${({ theme }) => theme.colors.darkGrey};
+  background-color: ${({ theme, highlighted }) =>
+    highlighted ? theme.colors.lightPurple : theme.colors.white};
+  width: 100%;
+  padding: 20px 5px;
+  cursor: pointer;
 
-    &:hover,
-    &:focus {
-      background-color: ${({ theme }) => theme.colors.lightPurple};
-    }
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.lightPurple};
+  }
 
-    &:not(:last-child) {
-      border-bottom: 1px solid ${({ theme }) => theme.colors.darkPurple};
-    }
+  &:not(:last-child) {
+    border-bottom: 1px solid ${({ theme }) => theme.colors.darkPurple};
   }
 `;
