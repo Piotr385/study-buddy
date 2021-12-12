@@ -8,6 +8,7 @@ export const Wrapper = styled.button`
   display: flex;
   align-items: center;
   align-self: start;
+  max-width: 45px;
   transition: background-color 300ms ease;
   cursor: pointer;
 
