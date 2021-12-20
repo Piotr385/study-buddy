@@ -8,19 +8,21 @@ import {
   StatusInfo,
 } from './SearchBar.styled';
 import { Input } from 'components/atoms/Form/Input/Input';
-import axios from 'axios';
+import useStudents from 'hooks/useStudents';
+import debounce from 'lodash.debounce';
 
 const SearchBar = () => {
-  const [matchingStudents, setMachingStudents] = useState([]);
+  const [matchingStudents, setMatchingStudents] = useState([]);
+  const { searchStudents } = useStudents();
 
-  const getSearchingStudents = ({ inputValue }) => {
-    axios
-      .get(`/students/search/${inputValue}`)
-      .then(({ data }) => {
-        if (data.searchingStudents) setMachingStudents(data.searchingStudents);
-      })
-      .catch((err) => console.log(err));
-  };
+  const getSearchingStudents = debounce(async ({ inputValue }) => {
+    if (inputValue) {
+      const students = await searchStudents(inputValue);
+      setMatchingStudents(students);
+    } else {
+      setMatchingStudents([]);
+    }
+  });
 
   const {
     isOpen,

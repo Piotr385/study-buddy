@@ -6,12 +6,15 @@ export const handlers = [
   rest.get('/groups', (req, res, ctx) => {
     return res(ctx.status(200), ctx.json({ groups }));
   }),
-  rest.get('/students/:group', (req, res, ctx) => {
+  rest.get('/groups/:group', (req, res, ctx) => {
     if (req.params.group) {
       const matchingStudents = students.filter(
         (student) => student.group === req.params.group
       );
-      return res(ctx.status(200), ctx.json({ students: matchingStudents }));
+      return res(
+        ctx.status(200),
+        ctx.json({ studentsGroup: matchingStudents })
+      );
     }
   }),
   rest.get('/students', (req, res, ctx) => {
@@ -28,5 +31,10 @@ export const handlers = [
       );
       return res(ctx.status(200), ctx.json({ searchingStudents }));
     }
+  }),
+  rest.get('/students/:id', (req, res, ctx) => {
+    const student = students.find((student) => student.id === req.params.id);
+
+    return res(ctx.status(200), ctx.json({ student }));
   }),
 ];

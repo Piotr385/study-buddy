@@ -17,6 +17,7 @@ export const StyledLi = styled.li`
   display: flex;
   align-items: center;
   position: relative;
+  cursor: pointer;
   &:not(:last-child)::after {
     content: '';
     position: absolute;

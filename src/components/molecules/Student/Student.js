@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import Average from 'components/atoms/User/Average/Average';
 import NameAndAttendance from 'components/atoms/User/NameAndAttendance/NameAndAttendance';
 import Button from 'components/atoms/UI/IconButton/Button';
-import close from 'assets/icons/error.svg';
-import { Wrapper } from './User.styled';
+import close from 'assets/icons/close.svg';
+import { Wrapper } from './Student.styled';
 import { UserShape } from 'types/index';
 import { UsersContext } from 'providers/UsersProvider';
 
-const User = ({ user }) => {
+const Student = ({ user }) => {
   const { deleteUser } = useContext(UsersContext);
 
   return (
@@ -20,8 +20,8 @@ const User = ({ user }) => {
   );
 };
 
-User.propTypes = {
+Student.propTypes = {
   user: PropTypes.shape(UserShape).isRequired,
 };
 
-export default User;
+export default Student;

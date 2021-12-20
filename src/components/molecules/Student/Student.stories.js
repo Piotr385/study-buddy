@@ -1,11 +1,11 @@
-import User from './User';
+import Student from './Student';
 
 export default {
-  title: 'components/molecules/User',
-  component: User,
+  title: 'components/molecules/Student',
+  component: Student,
   argTypes: {},
 };
-const Template = (args) => <User {...args} />;
+const Template = (args) => <Student {...args} />;
 
 export const GoodGrades = Template.bind([]);
 GoodGrades.args = {
