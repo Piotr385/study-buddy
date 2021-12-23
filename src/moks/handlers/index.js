@@ -1,6 +1,6 @@
 import { rest } from 'msw';
-import { students } from 'moks/data/students';
 import { groups } from 'moks/data/groups';
+import { db } from '../db';
 
 export const handlers = [
   rest.get('/groups', (req, res, ctx) => {
@@ -8,9 +8,13 @@ export const handlers = [
   }),
   rest.get('/groups/:group', (req, res, ctx) => {
     if (req.params.group) {
-      const matchingStudents = students.filter(
-        (student) => student.group === req.params.group
-      );
+      const matchingStudents = db.student.findMany({
+        where: {
+          group: {
+            equals: req.params.group,
+          },
+        },
+      });
       return res(
         ctx.status(200),
         ctx.json({ studentsGroup: matchingStudents })
@@ -18,22 +22,30 @@ export const handlers = [
     }
   }),
   rest.get('/students', (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json({ students }));
+    return res(ctx.status(200), ctx.json({ students: db.student.getAll() }));
   }),
   rest.get('/students/search/:searchValue', (req, res, ctx) => {
     if (req.params.searchValue) {
-      const encodedSearchValue = decodeURI(
-        req.params.searchValue
-      ).toLowerCase();
+      const encodedSearchValue = decodeURI(req.params.searchValue);
 
-      const searchingStudents = students.filter((student) =>
-        student.name.toLowerCase().includes(encodedSearchValue)
-      );
+      const searchingStudents = db.student.findMany({
+        where: {
+          name: {
+            contains: encodedSearchValue,
+          },
+        },
+      });
       return res(ctx.status(200), ctx.json({ searchingStudents }));
     }
   }),
   rest.get('/students/:id', (req, res, ctx) => {
-    const student = students.find((student) => student.id === req.params.id);
+    const student = db.student.findFirst({
+      where: {
+        id: {
+          equals: req.params.id,
+        },
+      },
+    });
 
     return res(ctx.status(200), ctx.json({ student }));
   }),

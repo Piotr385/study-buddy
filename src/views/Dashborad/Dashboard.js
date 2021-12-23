@@ -8,11 +8,12 @@ import { Wrapper } from './Dashboard.styled';
 import SelectedGroups from 'components/molecules/SelectedGroups/SelectedGroups';
 import useStudents from 'hooks/useStudents';
 import useModal from 'hooks/useModal';
+import Modal from 'components/organism/Modal/Modal';
 
 const Dashboard = () => {
   const [groups, setGroups] = useState([]);
   const { getGroups } = useStudents();
-  const { isOpen, handleOpenModal, handleCloseModal, Modal } = useModal();
+  const { isOpen, handleOpenModal, handleCloseModal } = useModal();
   const { group } = useParams();
 
   useEffect(() => {
@@ -33,11 +34,9 @@ const Dashboard = () => {
       <ViewWrapper>
         <StudentList group={group} />
       </ViewWrapper>
-      {isOpen ? (
-        <Modal handleClose={handleCloseModal}>
-          <SelectedGroups groups={groups} handleClose={handleCloseModal} />
-        </Modal>
-      ) : null}
+      <Modal isOpen={isOpen} handleClose={handleCloseModal}>
+        <SelectedGroups groups={groups} handleClose={handleCloseModal} />
+      </Modal>
     </>
   );
 };

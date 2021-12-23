@@ -20,11 +20,11 @@ const StudentDetails = ({ student, handleClose }) => (
     </Header>
     <Main>
       <BoldSpan>Course:</BoldSpan>
-      <CourseTitle>{student.course.name}</CourseTitle>
+      <CourseTitle>{student.course}</CourseTitle>
       <BoldSpan>Average grades:</BoldSpan>
       <StyledUl>
-        {student.course.subjectsAverages.map((subject) => (
-          <StudentSubjectsItem key={subject.name} subject={subject} />
+        {student.grades.map((grade) => (
+          <StudentSubjectsItem key={grade.subject} grade={grade} />
         ))}
       </StyledUl>
     </Main>

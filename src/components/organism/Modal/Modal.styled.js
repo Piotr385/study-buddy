@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 import { ViewWrapper } from 'components/molecules/ViewWrapper/ViewWrapper';
+import ReactModal from 'react-modal';
 
-export const Wrapper = styled.div`
+export const ModalWrapper = styled(ReactModal)`
   position: fixed;
-  background-color: #c5c5c596;
-  background-opacity: 0.5;
   top: 0;
   width: 100%;
   height: 100%;

@@ -25,7 +25,7 @@ export const StyledSubjectAverage = styled.div`
   height: min-content;
   justify-self: center;
   background-color: ${(props) =>
-    props.average >= 2 && props.average <= 3
+    props.average >= 1 && props.average <= 3
       ? '#CB8581'
       : props.average >= 3 && props.average <= 4
       ? '#E1D888'

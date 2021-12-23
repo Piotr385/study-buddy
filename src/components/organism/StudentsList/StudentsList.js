@@ -7,11 +7,12 @@ import { Title } from 'components/atoms/UI/Title/Title';
 import useStudents from 'hooks/useStudents';
 import useModal from 'hooks/useModal';
 import StudentDetails from 'components/molecules/StudentDetails/StudentDetails';
+import Modal from '../Modal/Modal';
 
 const StudentsList = ({ group }) => {
   const [students, setStudents] = useState([]);
   const [currentStudent, setCurrentStudent] = useState({});
-  const { isOpen, handleOpenModal, handleCloseModal, Modal } = useModal();
+  const { isOpen, handleOpenModal, handleCloseModal } = useModal();
   const { getStudents, getStudentById } = useStudents();
 
   useEffect(() => {
@@ -42,11 +43,12 @@ const StudentsList = ({ group }) => {
           </StyledLi>
         ))}
       </StyledUl>
-      {isOpen ? (
-        <Modal handleClose={handleCloseModal}>
-          <StudentDetails student={currentStudent} handleClose={handleCloseModal} />
-        </Modal>
-      ) : null}
+      <Modal isOpen={isOpen} handleClose={handleCloseModal}>
+        <StudentDetails
+          student={currentStudent}
+          handleClose={handleCloseModal}
+        />
+      </Modal>
     </>
   );
 };

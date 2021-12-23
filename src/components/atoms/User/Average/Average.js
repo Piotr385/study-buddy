@@ -5,7 +5,7 @@ import { Wrapper } from './Average.styled';
 const Average = ({ average }) => <Wrapper average={average}>{average}</Wrapper>;
 
 Average.propTypes = {
-  average: PropTypes.string.isRequired,
+  average: PropTypes.number.isRequired,
 };
 
 export default Average;

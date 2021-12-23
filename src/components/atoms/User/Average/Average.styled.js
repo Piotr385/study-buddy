@@ -7,9 +7,10 @@ export const Wrapper = styled.div`
   text-align: center;
   font-weight: bold;
   font-size: ${({ theme }) => theme.fontSize.l};
-  max-width: 45px;
+  width: 40px;
+  text-align: center;
   background-color: ${(props) =>
-    props.average >= 2 && props.average <= 3
+    props.average > 0 && props.average <= 3
       ? '#CB8581'
       : props.average >= 3 && props.average <= 4
       ? '#E1D888'

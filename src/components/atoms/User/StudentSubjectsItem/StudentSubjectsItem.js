@@ -5,9 +5,9 @@ import {
   StyledSubjectAverage,
 } from './StudentSubjectsItem.styled';
 
-const StudentSubjectsItem = ({ subject: { name, average } }) => (
+const StudentSubjectsItem = ({ grade: { subject, average } }) => (
   <StyledLi>
-    <StyledSubjectName>{name}</StyledSubjectName>
+    <StyledSubjectName>{subject}</StyledSubjectName>
     <StyledSubjectAverage average={average}>{average}</StyledSubjectAverage>
   </StyledLi>
 );

@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   width: 100%;
 
   & button {
-    justify-self: center;
+    justify-self: center !important;
   }
 `;
 
@@ -26,7 +26,7 @@ export const StyledAverage = styled.div`
   height: min-content;
   grid-column: 1;
   background-color: ${(props) =>
-    props.average >= 2 && props.average <= 3
+    props.average >= 1 && props.average <= 3
       ? '#CB8581'
       : props.average >= 3 && props.average <= 4
       ? '#E1D888'
