@@ -16,7 +16,6 @@ const UnauthenticatedApp = () => {
   const {
     formValues: { login, password, errorInputs },
     handleInputChange,
-    handleClearForm,
     handleThrowError,
   } = useForm(initialState);
   const { validateEmpty, validateEmail, validatePasswd } =
@@ -42,7 +41,6 @@ const UnauthenticatedApp = () => {
     };
 
     if (errorInputs.login === '' && errorInputs.password === '') {
-      handleClearForm(initialState);
       await auth.signIn(data);
     }
   };

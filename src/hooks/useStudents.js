@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import axios from 'axios';
+import { useError } from './useError';
 
 const studentsAPI = axios.create({});
 
@@ -19,49 +20,60 @@ studentsAPI.interceptors.request.use(
 );
 
 const useStudents = () => {
+  const { dispatchError } = useError();
+
   const getGroups = useCallback(async () => {
     try {
       const results = await studentsAPI.get('/groups');
       return results.data.groups;
     } catch (err) {
-      console.log(err);
+      dispatchError('Something went wrong! Cannot get groups!');
     }
-  }, []);
+  }, [dispatchError]);
 
-  const getStudents = useCallback(async (group) => {
-    if (group)
+  const getStudents = useCallback(
+    async (group) => {
+      if (group)
+        try {
+          const results = await studentsAPI.get(`/groups/${group}`);
+          return results.data.studentsGroup;
+        } catch (err) {
+          dispatchError('Something went wrong! Cannot get students!');
+        }
+      else
+        try {
+          const results = await studentsAPI.get(`/students`);
+          return results.data.students;
+        } catch (err) {
+          dispatchError('Something went wrong! Cannot get students!');
+        }
+    },
+    [dispatchError]
+  );
+
+  const searchStudents = useCallback(
+    async (inputValue) => {
       try {
-        const results = await studentsAPI.get(`/groups/${group}`);
-        return results.data.studentsGroup;
+        const results = await studentsAPI.get(`/students/search/${inputValue}`);
+        return results.data.searchingStudents;
       } catch (err) {
-        console.log(err);
+        dispatchError();
       }
-    else
+    },
+    [dispatchError]
+  );
+
+  const getStudentById = useCallback(
+    async (id) => {
       try {
-        const results = await studentsAPI.get(`/students`);
-        return results.data.students;
+        const results = await studentsAPI.get(`/students/${id}`);
+        return results.data.student;
       } catch (err) {
-        console.log(err);
+        dispatchError('Something went wrong! Cannot get student!');
       }
-  }, []);
-
-  const searchStudents = useCallback(async (inputValue) => {
-    try {
-      const results = await studentsAPI.get(`/students/search/${inputValue}`);
-      return results.data.searchingStudents;
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
-
-  const getStudentById = useCallback(async (id) => {
-    try {
-      const results = await studentsAPI.get(`/students/${id}`);
-      return results.data.student;
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
+    },
+    [dispatchError]
+  );
 
   return { getGroups, getStudents, searchStudents, getStudentById };
 };

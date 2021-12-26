@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import { useError } from './useError';
 
 const AuthContext = React.createContext({});
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const { dispatchError } = useError();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -33,7 +35,7 @@ export const AuthProvider = ({ children }) => {
       setUser(res.data);
       localStorage.setItem('token', res.data.token);
     } catch (e) {
-      console.log(e);
+      dispatchError('Invalid email or password');
     }
   };
 
@@ -54,7 +56,7 @@ export const useAuth = () => {
 
   if (!auth) {
     throw Error('useAuth needs to be used inside AuthContext');
-  } else {
-    return auth;
   }
+
+  return auth;
 };
