@@ -4,7 +4,15 @@ import { Input } from 'components/atoms/Form/Input/Input';
 import { Label } from 'components/atoms/Form/Label/Label';
 import { Wrapper } from './FormField.styled';
 
-const FormField = ({ label, name, id, value, onChange, type = 'text' }) => {
+const FormField = ({
+  label,
+  name,
+  id,
+  value,
+  onChange,
+  type = 'text',
+  required,
+}) => {
   return (
     <Wrapper>
       <Label htmlFor={id}>{label}</Label>
@@ -15,6 +23,7 @@ const FormField = ({ label, name, id, value, onChange, type = 'text' }) => {
         value={value}
         onChange={onChange}
         data-testid={label}
+        data-required={required}
       />
     </Wrapper>
   );

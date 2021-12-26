@@ -10,10 +10,10 @@ const SelectedGroups = ({ handleClose, groups = [] }) => {
         <TextButton
           onClick={handleClose}
           type="router-link"
-          key={group}
-          to={`/group/${group}`}
+          key={group.id}
+          to={`/group/${group.id}`}
         >
-          Group {group}
+          Group {group.id}
           <br />
         </TextButton>
       ))}

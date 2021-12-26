@@ -1,4 +1,5 @@
 import { useReducer } from 'react';
+import { useValidators } from './useValidators';
 
 const actionTypes = {
   inputChange: 'INPUT CHANGE',
@@ -26,7 +27,10 @@ const reducer = (state, action) => {
     case actionTypes.throwError:
       return {
         ...state,
-        error: action.errorValue,
+        errorInputs: {
+          ...state.errorInputs,
+          [action.field]: action.errorValue,
+        },
       };
     default:
       return state;
@@ -36,7 +40,24 @@ const reducer = (state, action) => {
 export const useForm = (initialValues) => {
   const [formValues, dispatch] = useReducer(reducer, initialValues);
 
+  const handleThrowError = (inputName, errorMessage) => {
+    dispatch({
+      type: actionTypes.throwError,
+      field: inputName,
+      errorValue: errorMessage,
+    });
+  };
+
+  const { validateEmpty, validateEmail, validatePasswd } =
+    useValidators(handleThrowError);
+
   const handleInputChange = (e) => {
+    if (e.target.getAttribute('data-required')) {
+      validateEmpty(e.target);
+      if (e.target.type === 'email') validateEmail(e.target);
+      if (e.target.type === 'password') validatePasswd(e.target);
+    }
+
     dispatch({
       type: actionTypes.inputChange,
       field: e.target.name,
@@ -46,13 +67,6 @@ export const useForm = (initialValues) => {
 
   const handleClearForm = (initialValues) => {
     dispatch({ type: actionTypes.clearValues, initialValues });
-  };
-
-  const handleThrowError = (errorMessage) => {
-    dispatch({
-      type: actionTypes.throwError,
-      errorValue: errorMessage,
-    });
   };
 
   const handleToggleConsent = () => {

@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
-import MenuElement from 'components/atoms/MenuElement/MenuElement';
-import { Wrapper, StyledMenu, Logo } from './Navigation.styled';
-import { menuElements as menuData } from 'data/MenuElements';
+import React from 'react';
+import {
+  Wrapper,
+  StyledMenu,
+  Logo,
+  LinkWrapper,
+  StyledLink,
+} from './Navigation.styled';
+import { useAuth } from 'hooks/useAuth';
 
 const Navigation = () => {
-  const [menuElements] = useState(menuData);
+  const auth = useAuth();
 
   return (
     <Wrapper>
@@ -16,14 +21,16 @@ const Navigation = () => {
         </h1>
       </Logo>
       <StyledMenu>
-        {menuElements.map(({ id, value, to, isCurrent }) => (
-          <MenuElement
-            value={value}
-            to={to}
-            key={id}
-            isCurrent={isCurrent}
-          ></MenuElement>
-        ))}
+        <LinkWrapper>
+          <StyledLink to="/" className="active">
+            Dashboard
+          </StyledLink>
+        </LinkWrapper>
+        <LinkWrapper>
+          <StyledLink as="a" onClick={auth.signOut}>
+            Logout
+          </StyledLink>
+        </LinkWrapper>
       </StyledMenu>
     </Wrapper>
   );

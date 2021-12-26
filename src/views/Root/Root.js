@@ -1,34 +1,12 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from 'react-router-dom';
-import MainTemplate from 'components/templates/MainTemplate/MainTemplate';
-import Dashboard from 'views/Dashborad/Dashboard';
-import { ThemeProvider } from 'styled-components';
-import { GlobalStyles } from 'assets/styles/GlobalStyles.styled';
-import { Wrapper } from 'views/Root/Root.styled';
-import { theme } from 'assets/styles/theme';
+import AuthenticatedApp from 'views/AuthenticatedApp/AuthenticatedApp';
+import UnauthenticatedApp from 'views/UnauthenticatedApp/UnauthenticatedApp';
+import { useAuth } from 'hooks/useAuth';
 
-const Root = () => (
-  <Router>
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <MainTemplate>
-        <Wrapper>
-          <Routes>
-            <Route path="/" element={<Navigate to="/group" />} />
-            <Route path="group" element={<Dashboard />}>
-              <Route path="group/" element={<Dashboard />} />
-              <Route path=":group" element={<Dashboard />} />
-            </Route>
-          </Routes>
-        </Wrapper>
-      </MainTemplate>
-    </ThemeProvider>
-  </Router>
-);
+const Root = () => {
+  const auth = useAuth();
+
+  return auth.user ? <AuthenticatedApp /> : <UnauthenticatedApp />;
+};
 
 export default Root;

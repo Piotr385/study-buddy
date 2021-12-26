@@ -1,21 +1,33 @@
 import { setupWorker } from 'msw';
 import { handlers } from './handlers';
 import { db } from './db';
-import { drop } from '@mswjs/data';
 
 export const worker = setupWorker(...handlers);
 
-const mocks = {
-  seed: () => {
-    for (let i = 0; i < 15; i++) {
-      db.student.create();
-    }
-    return db.student.getAll();
-  },
-  getStudents: () => db.student.getAll(),
-  drop: () => drop(db),
+const seed = () => {
+  db.group.create({
+    id: 'A',
+  });
+  db.group.create({
+    id: 'B',
+  });
+  db.group.create({
+    id: 'C',
+  });
+
+  db.teacher.create();
+
+  for (let i = 0; i < 25; i++) {
+    db.student.create();
+    db.event.create();
+  }
 };
 
-mocks.seed();
+seed();
 
-window.mocks = mocks;
+window.mocks = {
+  seed,
+  getStudents: () => db.student.getAll(),
+  getEvents: () => db.event.getAll(),
+  getGroups: () => db.group.getAll(),
+};
