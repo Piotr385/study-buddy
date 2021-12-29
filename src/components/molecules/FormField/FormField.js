@@ -4,30 +4,54 @@ import { Input } from 'components/atoms/Form/Input/Input';
 import { Label } from 'components/atoms/Form/Label/Label';
 import { Wrapper } from './FormField.styled';
 
-const FormField = ({
-  label,
-  name,
-  id,
-  value,
-  onChange,
-  type = 'text',
-  required,
-}) => {
-  return (
-    <Wrapper>
-      <Label htmlFor={id}>{label}</Label>
-      <Input
-        name={name}
-        id={id}
-        type={type}
-        value={value}
-        onChange={onChange}
-        data-testid={label}
-        data-required={required}
-      />
-    </Wrapper>
-  );
-};
+const FormField = React.forwardRef(
+  (
+    {
+      onChange,
+      value,
+      label,
+      name,
+      id,
+      type = 'text',
+      isTextarea,
+      required,
+      ...props
+    },
+    ref
+  ) => {
+    return (
+      <Wrapper>
+        <Label htmlFor={id}>{label}</Label>
+        {isTextarea ? (
+          <Input
+            isTextarea
+            as="textarea"
+            name={name}
+            id={id}
+            value={value}
+            onChange={onChange}
+            data-testid={label}
+            {...props}
+            ref={ref}
+            data-required={required}
+          />
+        ) : (
+          <Input
+            name={name}
+            id={id}
+            type={type}
+            value={value}
+            onChange={onChange}
+            data-testid={label}
+            {...props}
+            ref={ref}
+            data-required={required}
+          />
+        )}
+      </Wrapper>
+    );
+  }
+);
 
 FormField.propTypes = {
   label: PropTypes.string.isRequired,

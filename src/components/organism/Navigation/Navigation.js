@@ -22,9 +22,10 @@ const Navigation = () => {
       </Logo>
       <StyledMenu>
         <LinkWrapper>
-          <StyledLink to="/" className="active">
-            Dashboard
-          </StyledLink>
+          <StyledLink to="/group">Dashboard</StyledLink>
+        </LinkWrapper>
+        <LinkWrapper>
+          <StyledLink to="/notes">Notes</StyledLink>
         </LinkWrapper>
         <LinkWrapper>
           <StyledLink as="a" onClick={auth.signOut}>

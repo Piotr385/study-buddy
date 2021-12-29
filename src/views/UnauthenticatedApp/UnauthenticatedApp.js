@@ -28,7 +28,7 @@ const UnauthenticatedApp = () => {
 
     const inputs = e.target.querySelectorAll('input');
     inputs.forEach((input) => {
-      if (input.getAttribute('data-required')) {
+      if (input.getAttribute('data-required') === 'true') {
         validateEmpty(input);
         if (input.type === 'email') validateEmail(input);
         if (input.type === 'password') validatePasswd(input);

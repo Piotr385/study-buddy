@@ -52,7 +52,7 @@ export const useForm = (initialValues) => {
     useValidators(handleThrowError);
 
   const handleInputChange = (e) => {
-    if (e.target.getAttribute('data-required')) {
+    if (e.target.getAttribute('data-required') === 'true') {
       validateEmpty(e.target);
       if (e.target.type === 'email') validateEmail(e.target);
       if (e.target.type === 'password') validatePasswd(e.target);

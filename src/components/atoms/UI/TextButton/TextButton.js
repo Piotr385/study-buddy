@@ -31,7 +31,7 @@ const TextButton = ({
     );
   else
     return (
-      <StyledButton isBig={isBig} type="type" onClick={onClick}>
+      <StyledButton isBig={isBig} type={type} onClick={onClick}>
         {children}
       </StyledButton>
     );
